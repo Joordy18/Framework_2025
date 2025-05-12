@@ -3,6 +3,7 @@ class Controller {
 
     private $ctrl_name;
     protected $template = "default";
+    protected $vars = [];
 
     public function __construct(){
         if(method_exists($this,"__init")) {
@@ -11,13 +12,15 @@ class Controller {
         $this->ctrl_name = str_replace('Controller','',get_class($this));
     }
 
-    public function render($views = ''){
+    protected function render($views = ''){
         if ($views == ''){
             $views = debug_backtrace()[1]['function'];
         }
 
 
         ob_start();
+
+        extract($this->vars);
 
         if (file_exists(VIEWS.DS.$this->ctrl_name.DS.$views.'.php')) {
             include_once(VIEWS.DS.$this->ctrl_name.DS.$views.'.php');
@@ -34,6 +37,15 @@ class Controller {
         }
 
     }
+
+    protected function set($var){
+        $this->vars = array_merge($this->vars,$var);
+    }
+
+
+
+
+
 }
 
 
