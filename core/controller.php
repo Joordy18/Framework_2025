@@ -42,7 +42,32 @@ class Controller {
         $this->vars = array_merge($this->vars,$var);
     }
 
+    public function add_css($css){
+        if(!empty($css) && is_array($css)) {
+            foreach($css as $c){
+                echo "<link rel='stylesheet' href='/css/".$c."'.css'>";
+            }
+        }
+    }
 
+    public function add_js($js){
+        if(!empty($js) && is_array($js)) {
+            foreach($js as $j){
+                echo "<script src='/js/".$j."'.js'></script>";
+            }
+        }
+    }
+
+    protected function loadModel($model){
+        $model_name = $model."Model";
+        if (file_exists(MODELS.DS.$model_name.'.php')) {
+            include_once(MODELS.DS.$model_name.'.php');
+        } else {
+            echo "Erreur: Le modèle n'existe pas";
+        }
+
+        $this->$model = new $model_name();
+    }
 
 
 

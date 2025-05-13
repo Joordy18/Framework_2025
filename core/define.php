@@ -10,4 +10,6 @@ const CONTROLLERS = SRC.DS."controllers";
 const MODELS = SRC.DS."models";
 const VIEWS = SRC.DS."views";
 const TEMPLATES = SRC.DS."templates";
+const CSS = PUBLIQUE.DS."css";
+const JS = PUBLIQUE.DS."js";
 ?>
