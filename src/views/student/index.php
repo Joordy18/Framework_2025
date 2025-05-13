@@ -1,8 +1,13 @@
 <h1>Index</h1>
 
+<form method="get">
+    <input type="text" name="search" placeholder="Id ou nom">
+    <input type="submit" value="Rechercher">
+</form>
+
 <?php
 
-echo $data." ".$name;
-
-    //var_dump($this->vars);
+if (!empty($data)) {
+    var_dump($data);
+}
 ?>

@@ -24,6 +24,6 @@ class DB{
         $this->DB_PASS = $config['connections'][$connectionName]['password'];
         $this->DB_PORT = $config['connections'][$connectionName]['port'];
         $this->DB_NAME = $config['connections'][$connectionName]['dbname'];
-        var_dump($config['connections'][$connectionName]);
+        //var_dump($config['connections'][$connectionName]);
     }
 }

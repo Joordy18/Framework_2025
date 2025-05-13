@@ -15,10 +15,24 @@ class Model extends DB{
     public function findAll(){
         $stmt = $this->co->prepare("SELECT * FROM ".$this->table);
         $stmt->execute();
-        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        var_dump($data);
+        return $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
     }
 
-
+    public function find($val){
+        if (is_array($val)) {
+            $placeholders = implode(',', array_fill(0, count($val), '?'));
+            $stmt = $this->co->prepare("SELECT * FROM ".$this->table." WHERE id IN (".$placeholders.") OR name IN (".$placeholders.")");
+            $stmt->execute(array_merge($val, $val));
+        } else {
+            if (is_numeric($val)) {
+                $stmt = $this->co->prepare("SELECT * FROM ".$this->table." WHERE id = ?");
+            } else {
+                $stmt = $this->co->prepare("SELECT * FROM ".$this->table." WHERE nom = ?");
+            }
+            $stmt->execute([$val]);
+        }
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 }
