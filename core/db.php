@@ -2,11 +2,11 @@
 
 class DB{
     private $DB_HOST;
-    private $DB_USER;
+    private $DB_USER = "root";
     private $DB_PASS;
     private $DB_PORT;
     private $DB_NAME;
-    private $co;
+    protected $co;
 
     public function __construct(){
         $this->getConfig("default");
