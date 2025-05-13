@@ -12,4 +12,5 @@ const VIEWS = SRC.DS."views";
 const TEMPLATES = SRC.DS."templates";
 const CSS = PUBLIQUE.DS."css";
 const JS = PUBLIQUE.DS."js";
+const HELPER = CORE.DS."helpers";
 ?>

@@ -4,4 +4,5 @@ include_once ("kernel.php");
 include_once ("routeur.php");
 include_once ("controller.php");
 include_once ("db.php");
+include_once("model.php");
 

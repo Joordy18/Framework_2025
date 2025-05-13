@@ -6,12 +6,18 @@ class Kernel {
     
     public static function run() {
         self::$url = Routeur::getPath();
-        Routeur::getPath();
+
+        self::loadHelper("debug");
         self::loadController();
+
         $ctrlName = self::$url['controller'].'Controller';
         self::$controller = new $ctrlName();
 
-        call_user_func_array(array(self::$controller, self::$url['action']),[]);
+        if(method_exists(self::$controller, self::$url['action'])) {
+            call_user_func_array(array(self::$controller, self::$url['action']),[]);
+        } else {
+            echo "Erreur 404 : La page n'existe pas !";
+        }
 
     }
 
@@ -25,7 +31,13 @@ class Kernel {
 
     }
 
-
+    private static function loadHelper($helper){
+        if(file_exists(HELPER.DS.$helper.".php")){
+            include_once (HELPER.DS.$helper.".php");
+        }else{
+            echo("Erreur : Le helper n'existe pas");
+        }
+    }
 
 }
 ?>

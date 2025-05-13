@@ -6,8 +6,7 @@ class studentController extends Controller{
         $this->loadModel("student");
         $this->student->findAll();
 
-        $data = "Bonjour";
-        $name = "Lucas";
+        $data = "Bonjour"; $name = "Lucas";
         $this->set(compact("data","name"));
         $this->render();
     }
