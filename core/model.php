@@ -19,20 +19,55 @@ class Model extends DB{
 
     }
 
-    public function find($val){
-        if (is_array($val)) {
-            $placeholders = implode(',', array_fill(0, count($val), '?'));
-            $stmt = $this->co->prepare("SELECT * FROM ".$this->table." WHERE id IN (".$placeholders.") OR name IN (".$placeholders.")");
-            $stmt->execute(array_merge($val, $val));
-        } else {
-            if (is_numeric($val)) {
-                $stmt = $this->co->prepare("SELECT * FROM ".$this->table." WHERE id = ?");
-            } else {
-                $stmt = $this->co->prepare("SELECT * FROM ".$this->table." WHERE nom = ?");
+    public function find($params, $debug=false)
+    {
+        if (is_array($params)) {
+            $query = "SELECT * FROM " . $this->table . " WHERE ";
+            foreach ($params as $col => $val) {
+                $query .= $col . ' = :' . $col . ' AND ';
             }
-            $stmt->execute([$val]);
+            $query = substr($query, 0, -5);
+            $stmt = $this->co->prepare($query);
+            $stmt->execute($params);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } else {
+            $stmt = $this->co->prepare("SELECT * FROM " . $this->table . " WHERE id = ?");
+            $stmt->bindParam(1, $params);
+            $stmt->execute();
+            if($debug){
+                echo "<pre>";
+                $stmt->debugDumpParams();
+                echo "</pre>";
+            }
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         }
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function insert($nom, $prenom, $email) {
+        $query = "INSERT INTO " . $this->table . " (nom, prenom, email) VALUES (:nom, :prenom, :email)";
+        $stmt = $this->co->prepare($query);
+        return $stmt->execute([
+            'nom' => $nom,
+            'prenom' => $prenom,
+            'email' => $email
+        ]);
+    }
+
+    public function delete($id) {
+        $query = "DELETE FROM " . $this->table . " WHERE id = :id";
+        $stmt = $this->co->prepare($query);
+        return $stmt->execute(['id' => $id]);
+    }
+
+    public function update($id, $nom, $prenom, $email){
+        $query = "UPDATE ".$this->table." SET nom= :nom, prenom= :prenom, email= :email WHERE id= :id";
+        $stmt = $this->co->prepare($query);
+        return $stmt->execute([
+            'id' => $id,
+            'nom' => $nom,
+            'prenom' => $prenom,
+            'email' => $email
+        ]);
     }
 
 }

@@ -14,7 +14,7 @@ class Kernel {
         self::$controller = new $ctrlName();
 
         if(method_exists(self::$controller, self::$url['action'])) {
-            call_user_func_array(array(self::$controller, self::$url['action']),[]);
+            call_user_func_array(array(self::$controller, self::$url['action']),self::$url['params']);
         } else {
             echo "Erreur 404 : La page n'existe pas !";
         }
