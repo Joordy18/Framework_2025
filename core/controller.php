@@ -11,6 +11,7 @@ class Controller {
         }
         $this->ctrl_name = str_replace('Controller','',get_class($this));
         $this->loadModel($this->ctrl_name);
+
     }
 
     protected function render($views = ''){

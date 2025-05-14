@@ -6,7 +6,7 @@ return [
         "default" => [
             "host" => "localhost",
             "user" => "root",
-            "password" => "",
+            "password" => "admin",
             "port" => "3306",
             "dbname" => "framework"
         ],

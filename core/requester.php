@@ -1,50 +1,30 @@
 <?php
-
-
 class Requester
 {
-
-    private $baseUrl;
-
-    public function __construct($baseUrl)
-    {
-        $this->baseUrl = rtrim($baseUrl, '/');
+    public function insert($nom, $prenom, $email) {
+        $query = "INSERT INTO " . $this->table . " (id, nom, prenom, email) VALUES (NULL, :nom, :prenom, :email)";
+        $stmt = $this->co->prepare($query);
+        return $stmt->execute([
+            'nom' => $nom,
+            'prenom' => $prenom,
+            'email' => $email
+        ]);
     }
 
-    public function get($endpoint, $params = [])
-    {
-        $url = $this->baseUrl . '/' . $endpoint . '?' . http_build_query($params);
-        $response = file_get_contents($url);
-        return json_decode($response, true);
+    public function delete($id) {
+        $query = "DELETE FROM " . $this->table . " WHERE id = :id";
+        $stmt = $this->co->prepare($query);
+        return $stmt->execute(['id' => $id]);
     }
 
-    public function post($endpoint, $data = [])
-    {
-        $url = $this->baseUrl . '/' . $endpoint;
-        $options = [
-            'http' => [
-                'header' => "Content-Type: application/json\r\n",
-                'method' => 'POST',
-                'content' => json_encode($data),
-            ],
-        ];
-        $context = stream_context_create($options);
-        $response = file_get_contents($url, false, $context);
-        return json_decode($response, true);
-    }
-
-    public function delete($endpoint, $data = [])
-    {
-        $url = $this->baseUrl . '/' . $endpoint;
-        $options = [
-            'http' => [
-                'header' => "Content-Type: application/json\r\n",
-                'method' => 'DELETE',
-                'content' => json_encode($data),
-            ],
-        ];
-        $context = stream_context_create($options);
-        $response = file_get_contents($url, false, $context);
-        return json_decode($response, true);
+    public function update($id, $nom, $prenom, $email){
+        $query = "UPDATE ".$this->table." SET nom= :nom, prenom= :prenom, email= :email WHERE id= :id";
+        $stmt = $this->co->prepare($query);
+        return $stmt->execute([
+            'id' => $id,
+            'nom' => $nom,
+            'prenom' => $prenom,
+            'email' => $email
+        ]);
     }
 }
