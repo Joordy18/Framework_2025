@@ -1,0 +1,7 @@
+.htaccess dans root -> .htaccess public -> [ app.php core -> kernel -> routeur -> kernel (url parsed )
+-> helper et                               [ CSS JS IMG
+controller enfant -> model enfant -> model -> [ requester
+                                       [ DB -> config.php
+
+model enfant -> controller enfant ( info table ) -> [ controller -> template
+                                                    [ view

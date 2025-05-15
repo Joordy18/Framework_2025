@@ -6,7 +6,7 @@ class DB{
     private $DB_PASS;
     private $DB_PORT;
     private $DB_NAME;
-    protected $co;
+    public $co;
 
     public function __construct(){
         $this->getConfig("default");

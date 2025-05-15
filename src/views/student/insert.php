@@ -1,6 +1,6 @@
 <h1>Ajouter un étudiant</h1>
 
-<form method="post" action="/student/addStudent">
+<form method="post" action="/student/insert">
     <label for="nom">Nom:</label>
     <input type="text" id="nom" name="nom" required>
 

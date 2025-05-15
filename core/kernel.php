@@ -38,6 +38,4 @@ class Kernel {
             echo("Erreur : Le helper n'existe pas");
         }
     }
-
 }
-?>

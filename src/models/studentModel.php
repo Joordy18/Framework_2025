@@ -7,4 +7,5 @@ class studentModel extends Model {
 
     }
 
+
 }

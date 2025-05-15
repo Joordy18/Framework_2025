@@ -23,8 +23,10 @@
                 <td><?= $student['email'] ?></td>
                 <td>
                     <a href="<?= URL ?>view/<?= $student['id'] ?>/<?= $student['nom'] ?>">Détails</a>
-                    <a href="<?= URL ?>delete/<?= $student['id'] ?>">Supprimer</a>
-                    <a href="<?= URL ?>edit/<?= $student['id'] ?>">Modifier</a>
+                    <form id="supprform" method="post" action="<?= URL ?>delete/<?= $student['id'] ?>" style="display:inline;">
+                        <button type="submit" name="delete">Supprimer</button>
+                    </form>
+                    <a href="<?= URL ?>update/<?= $student['id'] ?>">Modifier</a>
                 </td>
             </tr>
         <?php endforeach; ?>
