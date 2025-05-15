@@ -11,4 +11,5 @@
     <input type="email" id="email" name="email" required>
 
     <button type="submit">Ajouter</button>
+    <button onclick="window.location.href='http://framework2025/student/index'">Retour à la liste</button>
 </form>
