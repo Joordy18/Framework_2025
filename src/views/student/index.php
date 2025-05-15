@@ -1,12 +1,7 @@
 <?php const URL = "http://framework2025/student/"; ?>
-<div id="loading-overlay">
-    <img src="https://media1.tenor.com/m/_QUyKSfzsbsAAAAd/glorpleave-glorp.gif" alt="Chargement...">
-</div>
-
-
-    <h1>Index</h1>
-    <h2>Liste des étudiants</h2>
-    <button onclick="'<?= URL ?>insert/'">Ajouter un étudiant</button>
+<h1>Index</h1>
+<h2>Liste des étudiants</h2>
+<button onclick="window.location.href='<?= URL ?>insert/'">Ajouter un étudiant</button>
 <?php if (!empty($data)): ?>
     <table>
         <thead>
@@ -39,28 +34,3 @@
 <?php else: ?>
     <p>Aucun étudiant trouvé.</p>
 <?php endif; ?>
-<style>
-    #loading-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(255, 255, 255, 0.9);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-        transition: opacity 1s ease, visibility 1s ease;
-    }
-
-    #loading-overlay.hidden {
-        opacity: 0;
-        visibility: hidden;
-    }
-
-    #loading-overlay img {
-        width: 10%;
-
-    }
-</style>

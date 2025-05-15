@@ -2,7 +2,7 @@
 class Requester
 {
     public function insert($nom, $prenom, $email) {
-        return "INSERT INTO student (id, nom, prenom, email) VALUES (NULL, :nom, :prenom, :email)";
+        return "INSERT INTO student (nom, prenom, email) VALUES (:nom, :prenom, :email)";
     }
 
     public function delete($id) {

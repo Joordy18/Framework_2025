@@ -12,23 +12,17 @@ class studentController extends Controller{
             $prenom = $_POST['prenom'];
             $email = $_POST['email'];
 
-            // Appel au Requester pour générer la requête SQL
             $requester = new Requester();
             $query = $requester->insert($nom, $prenom, $email);
-
-            // Préparation et exécution de la requête via le Model
             $stmt = $this->student->co->prepare($query);
             $stmt->execute([
                 'nom' => $nom,
                 'prenom' => $prenom,
                 'email' => $email
             ]);
-
-            // Redirection ou message de confirmation
             header('Location: /student/index');
             exit;
         }
-
         $this->render();
     }
 
@@ -38,11 +32,8 @@ class studentController extends Controller{
             $prenom = $_POST['prenom'];
             $email = $_POST['email'];
 
-            // Appel au Requester pour générer la requête SQL
             $requester = new Requester();
             $query = $requester->update($id, $nom, $prenom, $email);
-
-            // Préparation et exécution de la requête via le Model
             $stmt = $this->student->co->prepare($query);
             $stmt->execute([
                 'id' => $id,
@@ -50,12 +41,9 @@ class studentController extends Controller{
                 'prenom' => $prenom,
                 'email' => $email
             ]);
-
-            // Redirection ou message de confirmation
             header('Location: /student/index');
             exit;
         } else {
-            // Récupération des données existantes
             $student = $this->student->find(['id' => $id]);
             $this->set(compact("student"));
             $this->render();
@@ -64,19 +52,13 @@ class studentController extends Controller{
 
     public function delete($id) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Appel au Requester pour générer la requête SQL
             $requester = new Requester();
             $query = $requester->delete($id);
-
-            // Préparation et exécution de la requête via le Model
             $stmt = $this->student->co->prepare($query);
             $stmt->execute(['id' => $id]);
-
-            // Redirection ou message de confirmation
             header('Location: /student/index');
             exit;
         }
-
         $this->render();
     }
 
@@ -85,13 +67,9 @@ class studentController extends Controller{
             "id" => $id,
             "nom" => $name
         ]);
-
         if ($student) {
             $this->set(["student" => $student]);
-        } else {
-            $this->set(["student" => null]);
         }
-
         $this->render();
     }
 

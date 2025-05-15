@@ -122,25 +122,3 @@ p {
 strong {
     color: #555;
 }
-
-#transition-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('https://source.boomplaymusic.com/group10/M00/04/15/c15f6b7650f347f89ce0a4b545abffd2H3000W3000_320_320.jpg') no-repeat center center;
-    background-size: cover;
-    z-index: 9999;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
-    transform: rotate(0deg);
-}
-
-/* Overlay avec effet supplémentaire */
-#transition-overlay.active {
-    opacity: 1;
-    pointer-events: auto;
-    transform: rotate(720deg) scale(1.2);
-}
